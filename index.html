@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3498db">
+    <title>Aéro Club | Passion Modélisme</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Aéro<span>Club</span></div>
+            <ul class="nav-menu">
+                <li><a href="#presentation">Club</a></li>
+                <li><a href="#flotte">Flotte</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="hero-content">
+                <h1>L'art du vol miniature</h1>
+                <p>Bienvenue au club d'aéromodélisme de référence.</p>
+                <a href="#contact" class="cta-button">Nous rejoindre</a>
+            </div>
+        </section>
+
+        <section id="presentation" class="container">
+            <h2>Notre Passion</h2>
+            <p>Depuis 1995, notre club réunit les passionnés de construction et de pilotage de modèles réduits.</p>
+        </section>
+		
+<section id="presence" class="container">
+    <div class="presence-card">
+        <h3>Qui est au terrain ?</h3>
+        
+        <!-- Liste des membres affichée ici -->
+        <ul id="members-list" class="members-style">
+            <!-- Sera rempli par le JavaScript -->
+        </ul>
+
+        <div class="presence-actions">
+            <input type="text" id="member-name" placeholder="Ton nom ou pseudo" class="input-style">
+            <button id="presence-btn" class="cta-button">Signaler ma présence</button>
+        </div>
+    </div>
+</section>
+<section id="flotte" class="container">
+    <h2 class="section-title">Notre Flotte</h2>
+    <div class="gallery-grid">
+        <!-- Carte Modèle 1 -->
+        <div class="model-card">
+            <img src="https://images.unsplash.com/photo-1594494259853-2685a48d21bb?q=80&w=500" alt="Planeur">
+            <div class="model-info">
+                <h3>Planeur Alpha</h3>
+                <p>Envergure : 2.5m</p>
+            </div>
+        </div>
+        <!-- Carte Modèle 2 -->
+        <div class="model-card">
+            <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=500" alt="Avion Voltige">
+            <div class="model-info">
+                <h3>Extra 300</h3>
+                <p>Moteur : Thermique</p>
+            </div>
+        </div>
+        <!-- Carte Modèle 3 -->
+        <div class="model-card">
+            <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?q=80&w=500" alt="Drone FPV">
+            <div class="model-info">
+                <h3>Drone Racer X</h3>
+                <p>Vitesse : 120km/h</p>
+            </div>
+        </div>
+    </div>
+</section>   
+   </main>
+
+ <script type="module">
+    // 1. Importations Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+    import { getDatabase, ref, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
+
+    // 2. Configuration (Gardée telle quelle)
+  const firebaseConfig = {
+    apiKey: "AIzaSyCKX6fHMUwm-PB2Xa0fgXB1bOTLYaWCUj0",
+    authDomain: "modelsclubfleming.firebaseapp.com",
+    // Mise à jour de l'URL suite à l'erreur de la console :
+    databaseURL: "https://modelsclubfleming-default-rtdb.europe-west1.firebasedatabase.app", 
+    projectId: "modelsclubfleming",
+    storageBucket: "modelsclubfleming.firebasestorage.app",
+    messagingSenderId: "172176953870",
+    appId: "1:172176953870:web:6e74763041e61fa2f1a25f",
+    measurementId: "G-6VKLW4BTE5"
+};
+    // 3. Initialisation sécurisée
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // On attend que le HTML soit totalement chargé
+    document.addEventListener('DOMContentLoaded', () => {
+        const nameInput = document.getElementById('member-name');
+        const presenceBtn = document.getElementById('presence-btn');
+        const listElement = document.getElementById('members-list');
+        
+        let amIPresent = false;
+
+        if (!presenceBtn) {
+            console.error("Erreur : Le bouton 'presence-btn' n'a pas été trouvé dans le HTML.");
+            return;
+        }
+
+        // 4. Écoute de la base de données
+        onValue(ref(db, 'presence/'), (snapshot) => {
+            listElement.innerHTML = "";
+            const data = snapshot.val();
+            if (data) {
+                Object.keys(data).forEach((name) => {
+                    const li = document.createElement('li');
+                    li.style.padding = "10px";
+                    li.innerHTML = `<strong>${name}</strong> est sur la piste 🛩️`;
+                    listElement.appendChild(li);
+                });
+            } else {
+                listElement.innerHTML = "<li>Personne au terrain.</li>";
+            }
+        });
+
+        // 5. Gestion du clic
+        presenceBtn.onclick = () => {
+            const name = nameInput.value.trim();
+            if (!name) {
+                alert("Indique ton nom d'abord !");
+                return;
+            }
+
+            if (!amIPresent) {
+                set(ref(db, 'presence/' + name), { name: name }).then(() => {
+                    amIPresent = true;
+                    presenceBtn.innerText = "Je quitte le terrain";
+                    presenceBtn.style.background = "#e74c3c";
+                }).catch(err => console.error("Erreur Firebase set:", err));
+            } else {
+                remove(ref(db, 'presence/' + name)).then(() => {
+                    amIPresent = false;
+                    presenceBtn.innerText = "Signaler ma présence";
+                    presenceBtn.style.background = "#3498db";
+                    nameInput.value = "";
+                }).catch(err => console.error("Erreur Firebase remove:", err));
+            }
+        };
+    });
+</script>
+</body>
+</html>
+	
