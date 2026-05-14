@@ -49,16 +49,17 @@
 		
 <section id="presence" class="container">
     <div class="presence-card">
-        <h3>Qui est au terrain ?</h3>
+        <h3>Activité au terrain</h3>
         
-        <!-- Liste des membres affichée ici -->
-        <ul id="members-list" class="members-style">
-            <!-- Sera rempli par le JavaScript -->
-        </ul>
+        <div id="private-presence-content" style="display: none;">
+    <ul id="members-list" class="members-style"></ul>
+    <div class="presence-actions">
+        <button id="presence-btn" class="cta-button">Signaler ma présence</button>
+    </div>
+</div>
 
-        <div class="presence-actions">
-            <input type="text" id="member-name" placeholder="Ton nom ou pseudo" class="input-style">
-            <button id="presence-btn" class="cta-button">Signaler ma présence</button>
+        <div id="public-presence-message">
+            <p>ℹ️ Connectez-vous pour voir qui est actuellement au terrain et signaler votre présence.</p>
         </div>
     </div>
 </section>
@@ -144,34 +145,35 @@
         });
 
         // 5. Gestion du clic
-        presenceBtn.onclick = () => {
-            const name = nameInput.value.trim();
-            if (!name) {
-                alert("Indique ton nom d'abord !");
-                return;
-            }
+// FONCTION : Gérer le clic sur le bouton
+presenceBtn.onclick = () => {
+    if (!currentUser) return;
 
-            if (!amIPresent) {
-                set(ref(db, 'presence/' + name), { name: name }).then(() => {
-                    amIPresent = true;
-                    presenceBtn.innerText = "Je quitte le terrain";
-                    presenceBtn.style.background = "#e74c3c";
-                }).catch(err => console.error("Erreur Firebase set:", err));
-            } else {
-                remove(ref(db, 'presence/' + name)).then(() => {
-                    amIPresent = false;
-                    presenceBtn.innerText = "Signaler ma présence";
-                    presenceBtn.style.background = "#3498db";
-                    nameInput.value = "";
-                }).catch(err => console.error("Erreur Firebase remove:", err));
-            }
-        };
+    // On utilise l'UID (identifiant unique de Firebase) comme clé dans la base
+    // et l'email comme valeur d'affichage
+    const userRef = ref(db, 'presence/' + currentUser.uid);
+
+    if (!amIPresent) {
+        set(userRef, {
+            name: currentUser.email, // Utilise l'email du compte
+            timestamp: Date.now()
+        }).then(() => {
+            amIPresent = true;
+            updateButtonUI(true);
+        });
+    } else {
+        remove(userRef).then(() => {
+            amIPresent = false;
+            updateButtonUI(false);
+        });
+    }
+};
     });
 	
 	// 1. Ajouter l'import de l'Auth
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } 
 from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
-
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 const auth = getAuth(app);
 
 // 2. Éléments du DOM
@@ -181,17 +183,25 @@ const presenceActions = document.querySelector('.presence-actions'); // Le bloc 
 
 // 3. Surveiller la connexion
 onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // Utilisateur connecté (MEMBRE)
+    currentUser = user; // On mémorise l'utilisateur
+	if (user) {
+        // --- MODE MEMBRE ---
         loginBox.style.display = 'none';
         loggedBox.style.display = 'block';
-        presenceActions.style.display = 'block'; // Montre le bouton de présence
-        document.getElementById('user-display-name').innerText = user.email;
+        
+        // On affiche la liste et le bouton
+        privateContent.style.display = 'block';
+        publicMessage.style.display = 'none';
+        
+        checkIfAlreadyPresent(user);
     } else {
-        // Utilisateur non connecté (VISITEUR)
+        // --- MODE VISITEUR ---
         loginBox.style.display = 'block';
         loggedBox.style.display = 'none';
-        presenceActions.style.display = 'none'; // Cache le bouton de présence
+        
+        // On cache la liste et le bouton
+        privateContent.style.display = 'none';
+        publicMessage.style.display = 'block';
     }
 });
 
@@ -202,7 +212,16 @@ document.getElementById('btn-login').onclick = () => {
     signInWithEmailAndPassword(auth, email, pass)
         .catch(error => alert("Erreur : " + error.message));
 };
-
+// Petite fonction pour mettre à jour le look du bouton
+function updateButtonUI(present) {
+    if (present) {
+        presenceBtn.innerText = "Je quitte le terrain";
+        presenceBtn.style.background = "#e74c3c";
+    } else {
+        presenceBtn.innerText = "Signaler ma présence";
+        presenceBtn.style.background = "#3498db";
+    }
+}
 // 5. Déconnexion
 document.getElementById('btn-logout').onclick = () => signOut(auth);
 </script>
