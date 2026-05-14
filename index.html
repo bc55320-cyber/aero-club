@@ -21,7 +21,20 @@
     </header>
 
     <main>
-        <section id="hero">
+      
+<section id="auth-section" class="container">
+    <div id="login-form" class="auth-box">
+        <h3>Espace Membres</h3>
+        <input type="email" id="login-email" placeholder="Email" class="input-style">
+        <input type="password" id="login-password" placeholder="Mot de passe" class="input-style">
+        <button id="btn-login" class="cta-button">Se connecter</button>
+    </div>
+    <div id="user-logged" style="display: none;">
+        <p>Bienvenue, <span id="user-display-name"></span> !</p>
+        <button id="btn-logout" class="btn-small">Déconnexion</button>
+    </div>
+</section>
+	  <section id="hero">
             <div class="hero-content">
                 <h1>L'art du vol miniature</h1>
                 <p>Bienvenue au club d'aéromodélisme de référence.</p>
@@ -154,6 +167,44 @@
             }
         };
     });
+	
+	// 1. Ajouter l'import de l'Auth
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } 
+from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+
+const auth = getAuth(app);
+
+// 2. Éléments du DOM
+const loginBox = document.getElementById('login-form');
+const loggedBox = document.getElementById('user-logged');
+const presenceActions = document.querySelector('.presence-actions'); // Le bloc avec le bouton
+
+// 3. Surveiller la connexion
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // Utilisateur connecté (MEMBRE)
+        loginBox.style.display = 'none';
+        loggedBox.style.display = 'block';
+        presenceActions.style.display = 'block'; // Montre le bouton de présence
+        document.getElementById('user-display-name').innerText = user.email;
+    } else {
+        // Utilisateur non connecté (VISITEUR)
+        loginBox.style.display = 'block';
+        loggedBox.style.display = 'none';
+        presenceActions.style.display = 'none'; // Cache le bouton de présence
+    }
+});
+
+// 4. Fonction de connexion
+document.getElementById('btn-login').onclick = () => {
+    const email = document.getElementById('login-email').value;
+    const pass = document.getElementById('login-password').value;
+    signInWithEmailAndPassword(auth, email, pass)
+        .catch(error => alert("Erreur : " + error.message));
+};
+
+// 5. Déconnexion
+document.getElementById('btn-logout').onclick = () => signOut(auth);
 </script>
 </body>
 </html>
