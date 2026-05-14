@@ -265,3 +265,23 @@ nav {
     cursor: pointer;
     font-size: 0.8rem;
 }
+.model-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
+}
+
+.model-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(52, 152, 219, 0.2); /* Ombre bleutée au survol */
+    border-color: var(--primary);
+}
+
+.model-info h3 {
+    font-family: 'Oswald', sans-serif; /* Police typée aéro */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
