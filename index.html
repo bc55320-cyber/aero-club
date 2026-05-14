@@ -21,6 +21,21 @@
     </header>
 
     <main>
+        <section id="weather-section" class="container">
+    <div class="weather-card">
+        <div id="weather-loading">Chargement de la météo...</div>
+        <div id="weather-content" style="display: none;">
+            <div class="weather-main">
+                <span id="weather-icon"></span>
+                <span id="weather-temp">--°C</span>
+            </div>
+            <div class="weather-details">
+                <span>💨 Vent : <strong id="weather-wind">-- km/h</strong></span>
+                <span id="flight-status" class="status-badge">Analyse...</span>
+            </div>
+        </div>
+    </div>
+</section>
         <section id="auth-section" class="container">
             <div id="login-form" class="auth-box">
                 <h3>Espace Membres</h3>
@@ -219,6 +234,48 @@
                 presenceBtn.style.background = "#3498db";
             }
         }
+
+        async function getWeather() {
+    const apiKey = "TA_CLE_API_ICI"; // Remplace par ta clé
+    const city = "Sommedieue"; // Mets la ville de ton terrain
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=fr&appid=${apiKey}`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        document.getElementById('weather-loading').style.display = 'none';
+        document.getElementById('weather-content').style.display = 'flex';
+
+        // Affichage des données
+        document.getElementById('weather-temp').innerText = Math.round(data.main.temp) + "°C";
+        const windKmH = Math.round(data.wind.speed * 3.6); // Convertit m/s en km/h
+        document.getElementById('weather-wind').innerText = windKmH + " km/h";
+        
+        // Icône météo
+        const iconCode = data.weather[0].icon;
+        document.getElementById('weather-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${iconCode}.png">`;
+
+        // LOGIQUE DE VOL (Ex: Max 20km/h pour voler en sécurité)
+        const statusBadge = document.getElementById('flight-status');
+        if (windKmH < 15) {
+            statusBadge.innerText = "✅ Conditions Idéales";
+            statusBadge.style.background = "#27ae60";
+        } else if (windKmH < 25) {
+            statusBadge.innerText = "⚠️ Vent soutenu";
+            statusBadge.style.background = "#f39c12";
+        } else {
+            statusBadge.innerText = "🚩 Trop de vent !";
+            statusBadge.style.background = "#e74c3c";
+        }
+
+    } catch (error) {
+        console.error("Erreur météo:", error);
+    }
+}
+
+// Appeler la fonction au chargement
+getWeather();
     </script>
 </body>
 </html>
