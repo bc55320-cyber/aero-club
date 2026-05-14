@@ -7,6 +7,7 @@ const ASSETS_TO_CACHE = [
     './index.html',
     './style.css',
     './manifest.json',
+     './logo.jpg',
     'https://images.unsplash.com/photo-1473960104509-546e8b811317?auto=format&fit=crop&w=1200&q=80'
 ];
 
