@@ -96,9 +96,10 @@
 
  <<script type="module">
     // 1. Importations groupées
+	import { updateProfile } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
     import { getDatabase, ref, set, onValue, remove, get } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
     // 2. Configuration Firebase
     const firebaseConfig = {
@@ -134,24 +135,20 @@
     onAuthStateChanged(auth, (user) => {
         currentUser = user;
         if (user) {
-            // MODE MEMBRE
-            loginBox.style.display = 'none';
-            loggedBox.style.display = 'block';
-            privateContent.style.display = 'block';
-            publicMessage.style.display = 'none';
-            userDisplayName.innerText = user.email;
+        loginBox.style.display = 'none';
+        loggedBox.style.display = 'block';
+        privateContent.style.display = 'block';
+        publicMessage.style.display = 'none';
 
-            // Vérifier si l'utilisateur est déjà dans la liste des présents
-            const userRef = ref(db, 'presence/' + user.uid);
-            get(userRef).then((snapshot) => {
-                if (snapshot.exists()) {
-                    amIPresent = true;
-                    updateButtonUI(true);
-                } else {
-                    amIPresent = false;
-                    updateButtonUI(false);
-                }
-            });
+        // Affichage du vrai prénom s'il existe, sinon l'email
+        userDisplayName.innerText = user.displayName || user.email;
+
+        // Vérification de la présence actuelle
+        const userRef = ref(db, 'presence/' + user.uid);
+        get(userRef).then((snapshot) => {
+            amIPresent = snapshot.exists();
+            updateButtonUI(amIPresent);
+        });
         } else {
             // MODE VISITEUR
             loginBox.style.display = 'block';
@@ -180,26 +177,40 @@
     });
 
     // 7. Gestion du clic sur le bouton de présence
-    presenceBtn.onclick = () => {
-        if (!currentUser) return;
-        const userRef = ref(db, 'presence/' + currentUser.uid);
+   presenceBtn.onclick = async () => {
+    if (!currentUser) return;
 
-        if (!amIPresent) {
-            set(userRef, {
-                name: currentUser.email,
-                timestamp: Date.now()
-            }).then(() => {
-                amIPresent = true;
-                updateButtonUI(true);
-            });
-        } else {
-            remove(userRef).then(() => {
-                amIPresent = false;
-                updateButtonUI(false);
-            });
+    // 1. Si l'utilisateur n'a pas encore de "Vrai Prénom" dans son profil Firebase
+    if (!currentUser.displayName) {
+        const actingName = prompt("Veuillez saisir votre Prénom (et Nom si besoin) :");
+        if (!actingName) return; // Annule si rien n'est saisi
+
+        try {
+            // On enregistre le prénom dans le profil Firebase (pour ne plus le redemander)
+            await updateProfile(currentUser, { displayName: actingName });
+            userDisplayName.innerText = actingName;
+        } catch (err) {
+            console.error("Erreur mise à jour profil:", err);
         }
-    };
+    }
 
+    const userRef = ref(db, 'presence/' + currentUser.uid);
+
+    if (!amIPresent) {
+        set(userRef, {
+            name: currentUser.displayName, // Utilise le vrai prénom enregistré
+            timestamp: Date.now()
+        }).then(() => {
+            amIPresent = true;
+            updateButtonUI(true);
+        });
+    } else {
+        remove(userRef).then(() => {
+            amIPresent = false;
+            updateButtonUI(false);
+        });
+    }
+};
     // 8. Connexion et Déconnexion
     document.getElementById('btn-login').onclick = () => {
         const email = document.getElementById('login-email').value;
