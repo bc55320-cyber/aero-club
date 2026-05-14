@@ -386,3 +386,77 @@ nav {
     font-size: 1.8rem;
     color: var(--dark);
 }
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.info-card, .sites-container {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+.pricing-table td {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.pricing-table td:last-child {
+    text-align: right;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.calendar-list {
+    list-style: none;
+    padding: 0;
+}
+
+.calendar-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.calendar-list li strong {
+    color: var(--primary);
+}
+
+.btn-email {
+    display: inline-block;
+    background: var(--dark);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.btn-email:hover {
+    background: var(--primary);
+}
+
+.sites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.site-item {
+    background: var(--light);
+    padding: 15px;
+    border-radius: 10px;
+    border-top: 3px solid var(--primary);
+}
