@@ -270,7 +270,17 @@
             statusBadge.innerText = "🚩 Trop de vent !";
             statusBadge.style.background = "#e74c3c";
         }
+const windsock = document.getElementById('windsock');
 
+if (windKmH === 0) {
+    windsock.style.animation = "none"; // Pas de vent, elle ne bouge pas
+} else if (windKmH < 15) {
+    windsock.style.animation = "wave 2s ease-in-out infinite"; // Vent calme
+} else if (windKmH < 25) {
+    windsock.style.animation = "wave 0.8s ease-in-out infinite"; // Vent soutenu
+} else {
+    windsock.style.animation = "wave 0.3s ease-in-out infinite"; // Tempête !
+}
     } catch (error) {
         console.error("Erreur météo:", error);
     }
