@@ -21,20 +21,20 @@
     </header>
 
     <main>
-      
-<section id="auth-section" class="container">
-    <div id="login-form" class="auth-box">
-        <h3>Espace Membres</h3>
-        <input type="email" id="login-email" placeholder="Email" class="input-style">
-        <input type="password" id="login-password" placeholder="Mot de passe" class="input-style">
-        <button id="btn-login" class="cta-button">Se connecter</button>
-    </div>
-    <div id="user-logged" style="display: none;">
-        <p>Bienvenue, <span id="user-display-name"></span> !</p>
-        <button id="btn-logout" class="btn-small">Déconnexion</button>
-    </div>
-</section>
-	  <section id="hero">
+        <section id="auth-section" class="container">
+            <div id="login-form" class="auth-box">
+                <h3>Espace Membres</h3>
+                <input type="email" id="login-email" placeholder="Email" class="input-style">
+                <input type="password" id="login-password" placeholder="Mot de passe" class="input-style">
+                <button id="btn-login" class="cta-button">Se connecter</button>
+            </div>
+            <div id="user-logged" style="display: none;">
+                <p>Bienvenue, <span id="user-display-name"></span> !</p>
+                <button id="btn-logout" class="btn-small">Déconnexion</button>
+            </div>
+        </section>
+
+        <section id="hero">
             <div class="hero-content">
                 <h1>L'art du vol miniature</h1>
                 <p>Bienvenue au club d'aéromodélisme de référence.</p>
@@ -46,192 +46,179 @@
             <h2>Notre Passion</h2>
             <p>Depuis 1995, notre club réunit les passionnés de construction et de pilotage de modèles réduits.</p>
         </section>
-		
-<section id="presence" class="container">
-    <div class="presence-card">
-        <h3>Activité au terrain</h3>
-        
-        <div id="private-presence-content" style="display: none;">
-    <ul id="members-list" class="members-style"></ul>
-    <div class="presence-actions">
-        <button id="presence-btn" class="cta-button">Signaler ma présence</button>
-    </div>
-</div>
 
-        <div id="public-presence-message">
-            <p>ℹ️ Connectez-vous pour voir qui est actuellement au terrain et signaler votre présence.</p>
-        </div>
-    </div>
-</section>
-<section id="flotte" class="container">
-    <h2 class="section-title">Notre Flotte</h2>
-    <div class="gallery-grid">
-        <!-- Carte Modèle 1 -->
-        <div class="model-card">
-            <img src="https://images.unsplash.com/photo-1594494259853-2685a48d21bb?q=80&w=500" alt="Planeur">
-            <div class="model-info">
-                <h3>Planeur Alpha</h3>
-                <p>Envergure : 2.5m</p>
+        <section id="presence" class="container">
+            <div class="presence-card">
+                <h3>Activité au terrain</h3>
+                <div id="private-presence-content" style="display: none;">
+                    <ul id="members-list" class="members-style"></ul>
+                    <div class="presence-actions">
+                        <button id="presence-btn" class="cta-button">Signaler ma présence</button>
+                    </div>
+                </div>
+                <div id="public-presence-message">
+                    <p>ℹ️ Connectez-vous pour voir qui est actuellement au terrain et signaler votre présence.</p>
+                </div>
             </div>
-        </div>
-        <!-- Carte Modèle 2 -->
-        <div class="model-card">
-            <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=500" alt="Avion Voltige">
-            <div class="model-info">
-                <h3>Extra 300</h3>
-                <p>Moteur : Thermique</p>
+        </section>
+
+        <section id="flotte" class="container">
+            <h2 class="section-title">Notre Flotte</h2>
+            <div class="gallery-grid">
+                <div class="model-card">
+                    <img src="https://images.unsplash.com/photo-1594494259853-2685a48d21bb?q=80&w=500" alt="Planeur">
+                    <div class="model-info">
+                        <h3>Planeur Alpha</h3>
+                        <p>Envergure : 2.5m</p>
+                    </div>
+                </div>
+                <div class="model-card">
+                    <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=500" alt="Avion Voltige">
+                    <div class="model-info">
+                        <h3>Extra 300</h3>
+                        <p>Moteur : Thermique</p>
+                    </div>
+                </div>
+                <div class="model-card">
+                    <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?q=80&w=500" alt="Drone FPV">
+                    <div class="model-info">
+                        <h3>Drone Racer X</h3>
+                        <p>Vitesse : 120km/h</p>
+                    </div>
+                </div>
             </div>
-        </div>
-        <!-- Carte Modèle 3 -->
-        <div class="model-card">
-            <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?q=80&w=500" alt="Drone FPV">
-            <div class="model-info">
-                <h3>Drone Racer X</h3>
-                <p>Vitesse : 120km/h</p>
-            </div>
-        </div>
-    </div>
-</section>   
-   </main>
+        </section>   
+    </main>
 
- <<script type="module">
-    // 1. Importations groupées
-	import { updateProfile } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
-    import { getDatabase, ref, set, onValue, remove, get } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+    <script type="module">
+        // 1. Importations groupées
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+        import { getDatabase, ref, set, onValue, remove, get } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
-    // 2. Configuration Firebase
-    const firebaseConfig = {
-        apiKey: "AIzaSyCKX6fHMUwm-PB2Xa0fgXB1bOTLYaWCUj0",
-        authDomain: "modelsclubfleming.firebaseapp.com",
-        databaseURL: "https://modelsclubfleming-default-rtdb.europe-west1.firebasedatabase.app", 
-        projectId: "modelsclubfleming",
-        storageBucket: "modelsclubfleming.firebasestorage.app",
-        messagingSenderId: "172176953870",
-        appId: "1:172176953870:web:6e74763041e61fa2f1a25f",
-        measurementId: "G-6VKLW4BTE5"
-    };
+        // 2. Configuration Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCKX6fHMUwm-PB2Xa0fgXB1bOTLYaWCUj0",
+            authDomain: "modelsclubfleming.firebaseapp.com",
+            databaseURL: "https://modelsclubfleming-default-rtdb.europe-west1.firebasedatabase.app", 
+            projectId: "modelsclubfleming",
+            storageBucket: "modelsclubfleming.firebasestorage.app",
+            messagingSenderId: "172176953870",
+            appId: "1:172176953870:web:6e74763041e61fa2f1a25f",
+            measurementId: "G-6VKLW4BTE5"
+        };
 
-    // 3. Initialisation
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const auth = getAuth(app);
+        // 3. Initialisation
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
 
-    // 4. Variables globales du script
-    let currentUser = null;
-    let amIPresent = false;
+        // 4. Variables globales
+        let currentUser = null;
+        let amIPresent = false;
 
-    // Récupération des éléments du DOM
-    const loginBox = document.getElementById('login-form');
-    const loggedBox = document.getElementById('user-logged');
-    const privateContent = document.getElementById('private-presence-content');
-    const publicMessage = document.getElementById('public-presence-message');
-    const presenceBtn = document.getElementById('presence-btn');
-    const listElement = document.getElementById('members-list');
-    const userDisplayName = document.getElementById('user-display-name');
+        const loginBox = document.getElementById('login-form');
+        const loggedBox = document.getElementById('user-logged');
+        const privateContent = document.getElementById('private-presence-content');
+        const publicMessage = document.getElementById('public-presence-message');
+        const presenceBtn = document.getElementById('presence-btn');
+        const listElement = document.getElementById('members-list');
+        const userDisplayName = document.getElementById('user-display-name');
 
-    // 5. Surveiller la connexion (Auth)
-    onAuthStateChanged(auth, (user) => {
-        currentUser = user;
-        if (user) {
-        loginBox.style.display = 'none';
-        loggedBox.style.display = 'block';
-        privateContent.style.display = 'block';
-        publicMessage.style.display = 'none';
+        // 5. Surveiller la connexion
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            if (user) {
+                loginBox.style.display = 'none';
+                loggedBox.style.display = 'block';
+                privateContent.style.display = 'block';
+                publicMessage.style.display = 'none';
+                userDisplayName.innerText = user.displayName || user.email;
 
-        // Affichage du vrai prénom s'il existe, sinon l'email
-        userDisplayName.innerText = user.displayName || user.email;
-
-        // Vérification de la présence actuelle
-        const userRef = ref(db, 'presence/' + user.uid);
-        get(userRef).then((snapshot) => {
-            amIPresent = snapshot.exists();
-            updateButtonUI(amIPresent);
+                const userRef = ref(db, 'presence/' + user.uid);
+                get(userRef).then((snapshot) => {
+                    amIPresent = snapshot.exists();
+                    updateButtonUI(amIPresent);
+                });
+            } else {
+                loginBox.style.display = 'block';
+                loggedBox.style.display = 'none';
+                privateContent.style.display = 'none';
+                publicMessage.style.display = 'block';
+                amIPresent = false;
+            }
         });
-        } else {
-            // MODE VISITEUR
-            loginBox.style.display = 'block';
-            loggedBox.style.display = 'none';
-            privateContent.style.display = 'none';
-            publicMessage.style.display = 'block';
-            amIPresent = false;
-        }
-    });
 
-    // 6. Écouter la liste de présence en temps réel
-    onValue(ref(db, 'presence/'), (snapshot) => {
-        listElement.innerHTML = "";
-        const data = snapshot.val();
-        if (data) {
-            Object.values(data).forEach((member) => {
-                const li = document.createElement('li');
-                li.style.padding = "10px";
-                li.style.borderBottom = "1px solid #eee";
-                li.innerHTML = `<strong>${member.name}</strong> est sur la piste 🛩️`;
-                listElement.appendChild(li);
-            });
-        } else {
-            listElement.innerHTML = "<li>Personne au terrain.</li>";
-        }
-    });
-
-    // 7. Gestion du clic sur le bouton de présence
-   presenceBtn.onclick = async () => {
-    if (!currentUser) return;
-
-    // 1. Si l'utilisateur n'a pas encore de "Vrai Prénom" dans son profil Firebase
-    if (!currentUser.displayName) {
-        const actingName = prompt("Veuillez saisir votre Prénom (et Nom si besoin) :");
-        if (!actingName) return; // Annule si rien n'est saisi
-
-        try {
-            // On enregistre le prénom dans le profil Firebase (pour ne plus le redemander)
-            await updateProfile(currentUser, { displayName: actingName });
-            userDisplayName.innerText = actingName;
-        } catch (err) {
-            console.error("Erreur mise à jour profil:", err);
-        }
-    }
-
-    const userRef = ref(db, 'presence/' + currentUser.uid);
-
-    if (!amIPresent) {
-        set(userRef, {
-            name: currentUser.displayName, // Utilise le vrai prénom enregistré
-            timestamp: Date.now()
-        }).then(() => {
-            amIPresent = true;
-            updateButtonUI(true);
+        // 6. Écouter la liste de présence
+        onValue(ref(db, 'presence/'), (snapshot) => {
+            listElement.innerHTML = "";
+            const data = snapshot.val();
+            if (data) {
+                Object.values(data).forEach((member) => {
+                    const li = document.createElement('li');
+                    li.style.padding = "10px";
+                    li.style.borderBottom = "1px solid #eee";
+                    li.innerHTML = `<strong>${member.name}</strong> est sur la piste 🛩️`;
+                    listElement.appendChild(li);
+                });
+            } else {
+                listElement.innerHTML = "<li>Personne au terrain.</li>";
+            }
         });
-    } else {
-        remove(userRef).then(() => {
-            amIPresent = false;
-            updateButtonUI(false);
-        });
-    }
-};
-    // 8. Connexion et Déconnexion
-    document.getElementById('btn-login').onclick = () => {
-        const email = document.getElementById('login-email').value;
-        const pass = document.getElementById('login-password').value;
-        signInWithEmailAndPassword(auth, email, pass)
-            .catch(error => alert("Erreur : " + error.message));
-    };
 
-    document.getElementById('btn-logout').onclick = () => signOut(auth);
+        // 7. Gestion du bouton de présence
+        presenceBtn.onclick = async () => {
+            if (!currentUser) return;
 
-    // Fonction utilitaire pour le bouton
-    function updateButtonUI(present) {
-        if (present) {
-            presenceBtn.innerText = "Je quitte le terrain";
-            presenceBtn.style.background = "#e74c3c";
-        } else {
-            presenceBtn.innerText = "Signaler ma présence";
-            presenceBtn.style.background = "#3498db";
+            if (!currentUser.displayName) {
+                const actingName = prompt("Veuillez saisir votre Prénom :");
+                if (!actingName) return;
+
+                try {
+                    await updateProfile(currentUser, { displayName: actingName });
+                    userDisplayName.innerText = actingName;
+                } catch (err) {
+                    console.error("Erreur profil:", err);
+                }
+            }
+
+            const userRef = ref(db, 'presence/' + currentUser.uid);
+
+            if (!amIPresent) {
+                set(userRef, {
+                    name: currentUser.displayName,
+                    timestamp: Date.now()
+                }).then(() => {
+                    amIPresent = true;
+                    updateButtonUI(true);
+                });
+            } else {
+                remove(userRef).then(() => {
+                    amIPresent = false;
+                    updateButtonUI(false);
+                });
+            }
+        };
+
+        // 8. Login / Logout
+        document.getElementById('btn-login').onclick = () => {
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-password').value;
+            signInWithEmailAndPassword(auth, email, pass)
+                .catch(error => alert("Erreur : " + error.message));
+        };
+
+        document.getElementById('btn-logout').onclick = () => signOut(auth);
+
+        function updateButtonUI(present) {
+            if (present) {
+                presenceBtn.innerText = "Je quitte le terrain";
+                presenceBtn.style.background = "#e74c3c";
+            } else {
+                presenceBtn.innerText = "Signaler ma présence";
+                presenceBtn.style.background = "#3498db";
+            }
         }
-    }
-</script>
+    </script>
 </body>
 </html>
-	
