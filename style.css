@@ -319,3 +319,23 @@ nav {
     font-weight: bold;
     margin-left: 10px;
 }
+
+.wind-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+}
+
+#windsock {
+    display: inline-block;
+    font-size: 1.5rem;
+    transform-origin: left center;
+    /* Animation de base */
+    animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(15deg); }
+}
