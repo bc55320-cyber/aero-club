@@ -266,3 +266,11 @@ nav {
     text-align: left;
     margin: 15px 0;
 }
+/* Style pour les images intégrées dans les cartes et sections */
+.section-img {
+    width: 100%;          /* L'image prend toute la largeur de sa carte */
+    height: 200px;        /* Hauteur fixe pour que toutes les cartes soient alignées */
+    object-fit: cover;    /* L'image est recadrée proprement sans être écrasée */
+    border-radius: 8px;   /* Petits bords arrondis esthétiques */
+    margin-bottom: 15px;  /* Espace entre l'image et le titre */
+}
