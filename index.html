@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#3498db">
-    <title>Aéro Club | Passion Modélisme</title>
+    <title>Models Club Fleming | Passion Aéro Modélisme</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,36 +12,102 @@
    <header>
     <nav class="container">
         <a href="./">
-            <img src="logo.jpg" alt="Aéro Club Logo" class="logo-img">
+            <img src="logo.jpg" alt="Model's Club Fleming" class="logo-img">
         </a>
         <ul class="nav-menu">
-            <li><a href="#presentation">Club</a></li>
-            <li><a href="#flotte">Flotte</a></li>
+                <li><a href="#presentation">Pourquoi nous rejoindre</a></li>
+                <li><a href="#sites">Nos Sites</a></li>
+                <li><a href="#tarifs">Infos & Tarifs</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href="#espace-prive" style="color: var(--primary); font-weight: bold;">🔐 Espace Membres</a></li>
         </ul>
     </nav>
 </header>
-    <main>
-        <section id="weather-section" class="container">
-    <div class="weather-card">
-        <div id="weather-loading">Chargement de la météo...</div>
-        <div id="weather-content" style="display: none;">
-            <div class="weather-main">
-                <span id="weather-icon"></span>
-                <span id="weather-temp">--°C</span>
+<main>
+        <section id="hero">
+            <div class="hero-content">
+                <h1>Model's Club Fleming</h1>
+                <p>Partagez la passion de l'aéromodélisme avec nous</p>
+                <a href="#presentation" class="cta-button">Découvrir le club</a>
             </div>
-           <div class="weather-details">
-    <div class="wind-container">
-        <span id="windsock">🚩</span> <span>Vent : <strong id="weather-wind">-- km/h</strong></span>
-    </div>
-    <span id="flight-status" class="status-badge">Analyse...</span>
-</div>
-        </div>
-    </div>
-</section>
-<section id="adhesion" class="container">
-    <h2 class="section-title">Adhérer au Club (Saison 2025)</h2>
-    <div class="info-grid">
+        </section>
+
+        <section id="public-weather" class="container">
+            <h2 class="section-title">🌤️ Météo du jour</h2>
+            <div class="weather-card" style="background: linear-gradient(135deg, #34495e, #2c3e50);">
+                <div id="weather-loading">Chargement des conditions de vol...</div>
+                <div id="weather-content" style="display: none;">
+                    <div class="weather-main">
+                        <span id="weather-icon"></span>
+                        <span id="weather-temp">--°C</span>
+                    </div>
+                    <div class="weather-details">
+                        <div class="wind-container">
+                            <span id="windsock">🚩</span> <span>Vent : <strong id="weather-wind">-- km/h</strong></span>
+                        </div>
+                        <span id="flight-status" class="status-badge">Analyse...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="presentation" class="container">
+            <h2 class="section-title">Pourquoi adhérer au club ?</h2>
+            <div class="info-grid">
+                <div class="pricing-card">
+                    <h3>🤝 Entraide & Partage</h3>
+                    <p>Le modélisme est avant tout une aventure humaine. Au club, vous trouverez toujours un membre expérimenté pour vous conseiller sur le choix de votre matériel, vous aider à régler un moteur, peaufiner l'électronique de votre modèle ou partager des astuces de construction.</p>
+                </div>
+                <div class="pricing-card">
+                    <h3>🎓 Apprendre à piloter en écolage</h3>
+                    <p>Débutez en toute sécurité ! Grâce à notre système de double commande (écolage), un moniteur qualifié vous accompagne pas à pas lors de vos premiers vols. Vous apprenez les réflexes de pilotage sans risquer d'endommager votre matériel.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sites" class="container">
+            <h2 class="section-title">Nos Sites et Infrastructures</h2>
+            <div class="sites-grid">
+                <div class="site-box">
+                    <h3>🛩️ Le Terrain de Vol</h3>
+                    <p>Notre terrain extérieur dispose d'une piste dégagée parfaitement entretenue, idéale pour faire décoller vos avions, planeurs et hélicoptères de toutes tailles en toute liberté et sécurité.</p>
+                </div>
+                <div class="site-box">
+                    <h3>🛠️ La Salle de Construction</h3>
+                    <p>Un espace équipé d'outillage dédié à l'assemblage et à la réparation de vos modèles. C'est le lieu parfait pour échanger des techniques de construction pendant les longues journées d'hiver.</p>
+                </div>
+                <div class="site-box">
+                    <h3>🏠 La Salle Indoor</h3>
+                    <p>Pour ne jamais s'arrêter de voler ! Nous disposons d'un accès régulier à un gymnase (salle indoor) permettant le pilotage de modèles ultra-légers (Shockflyers, petits drones) à l'abri de la météo.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="evenements" class="container">
+            <h3>Événements 2026</h3>
+            <ul class="calendar">
+                <li><span>2 Mars</span> InterClub indoor / Portes ouvertes</li>
+                <li><span>31 Juin</span> Portes ouvertes (Quartier Gribeauval)</li>
+                <li><span>2 Août</span> Air Doudou (Terrain Thierville)</li>
+                <li><span>21-22 Août</span> InterClub Privé Outdoor</li>
+            </ul>
+            <h2 class="section-title">Événements & Vie du Club</h2>
+            <div class="info-grid">
+                <div class="events-card">
+                    <h3>📅 Événements Publics</h3>
+                    <p>Journées portes ouvertes, démonstrations de vol, meetings aériens... Venez découvrir nos machines et rencontrer nos pilotes lors de nos rassemblements ouverts à tous.</p>
+                </div>
+                <div class="events-card">
+                    <h3>🏆 Rencontres Interclubs</h3>
+                    <p>Nous organisons régulièrement des journées d'échange avec les clubs de la région. Un moment de convivialité idéal pour partager notre passion commune autour d'un barbecue et de vols mémorables.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tarifs" class="container">
+            <h2 class="section-title">Inscriptions et Tarifs</h2>
+            <div class="info-grid">
+                <div class="pricing-card" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto;">
         <div class="pricing-card">
             <h3>Tarifs des Licences</h3>
             <ul>
@@ -51,21 +117,19 @@
                 <li><strong>Cadet (-14 ans) :</strong> 39 €</li>
                 <li><strong>Non Pratiquant :</strong> 44 €</li>
             </ul>
+                   <div class="contact-box" style="text-align: center;">
+                        <p>Le club est affilié à la Fédération Française d'AéroModélisme.</p>
+                        <a href="https://www.ffam.asso.fr/" target="_blank" class="btn-email" style="background-color: var(--primary);">🌐 Visiter le site de la FFAM</a>
+                    </div>
+                </div>
+            </div>
            <div class="contact-box">
                 <p><strong>Benoit Chaumet</strong> (Président)</p>
                 <p>📞 06 07 81 22 95</p>
                 <a href="mailto:models.club.fleming55@gmail.com" class="btn-email">📧 Nous contacter par mail</a>
             </div>
         </div>
-        <div class="events-card">
-            <h3>Événements 2026</h3>
-            <ul class="calendar">
-                <li><span>2 Mars</span> InterClub indoor / Portes ouvertes</li>
-                <li><span>31 Juin</span> Portes ouvertes (Quartier Gribeauval)</li>
-                <li><span>2 Août</span> Air Doudou (Terrain Thierville)</li>
-                <li><span>21-22 Août</span> InterClub Privé Outdoor</li>
-            </ul>
-        </div>
+
     </div>
 </section>
 
@@ -87,7 +151,42 @@
     </div>
 </section>
         
-        <section id="auth-section" class="container">
+<section id="espace-prive" style="background-color: #eaeded; padding: 40px 0; margin-top: 50px; border-top: 3px solid var(--dark);">
+            <div class="container">
+                <h2 class="section-title" style="margin-top: 0;">🔐 Espace Privé Membres</h2>
+                
+                <div class="auth-box" id="auth-section" style="max-width: 400px; margin: 0 auto 30px; text-align: center;">
+                    <h3>Connexion requise</h3>
+                    <input type="email" placeholder="Email de membre" class="input-style" id="member-email">
+                    <input type="password" placeholder="Mot de passe" class="input-style" id="member-password">
+                    <button class="cta-button" style="width: 100%; margin-top: 10px;">Se connecter</button>
+                </div>
+
+                <div id="private-content" class="info-grid">
+                    
+                    <div class="presence-card">
+                        <h3>🚗 Qui va au terrain aujourd'hui ?</h3>
+                        <p>Signalez votre présence pour ne pas voler seul !</p>
+                        <button class="btn-small" style="background-color: var(--primary);">Je signale ma présence</button>
+                        <ul class="members-style" style="margin-top: 15px;">
+                            <li>• Thomas (Prévu à 14h00)</li>
+                            <li>• Michel (Déjà sur place)</li>
+                        </ul>
+                    </div>
+
+                    <div class="presence-card">
+                        <h3>📢 Bulletin d'information interne</h3>
+                        <ul class="calendar">
+                            <li><strong>15 Mai :</strong> Compte-rendu de la dernière réunion disponible.</li>
+                            <li><strong>10 Mai :</strong> Travaux de tonte de la piste prévus samedi matin, venez nombreux !</li>
+                            <li><strong>01 Mai :</strong> Code du cadenas de la salle de construction modifié (voir vos mails).</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    <section id="auth-section" class="container">
             <div id="login-form" class="auth-box">
                 <h3>Espace Membres</h3>
                 <input type="email" id="login-email" placeholder="Email" class="input-style">
@@ -128,32 +227,10 @@
             </div>
         </section>
 
-        <section id="flotte" class="container">
-            <h2 class="section-title">Notre Flotte</h2>
-            <div class="gallery-grid">
-                <div class="model-card">
-                    <img src="https://images.unsplash.com/photo-1594494259853-2685a48d21bb?q=80&w=500" alt="Planeur">
-                    <div class="model-info">
-                        <h3>Planeur Alpha</h3>
-                        <p>Envergure : 2.5m</p>
-                    </div>
-                </div>
-                <div class="model-card">
-                    <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=500" alt="Avion Voltige">
-                    <div class="model-info">
-                        <h3>Extra 300</h3>
-                        <p>Moteur : Thermique</p>
-                    </div>
-                </div>
-                <div class="model-card">
-                    <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?q=80&w=500" alt="Drone FPV">
-                    <div class="model-info">
-                        <h3>Drone Racer X</h3>
-                        <p>Vitesse : 120km/h</p>
-                    </div>
-                </div>
-            </div>
-        </section>   
+
+    <footer style="background-color: var(--dark); color: white; padding: 20px 0; text-align: center; margin-top: 50px;">
+        <p>&copy; 2026 Model's Club Fleming. Tous droits réservés.</p>
+    </footer>
     </main>
 
     <script type="module">
