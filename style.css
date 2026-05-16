@@ -22,7 +22,7 @@ body {
 header {
     background: white;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 1rem 0;
+    padding: 0.5rem 0; /* Réduit pour s'adapter au logo */
     position: sticky;
     top: 0;
     z-index: 100;
@@ -34,13 +34,12 @@ nav {
     align-items: center;
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--dark);
+/* Style ajusté pour votre logo image */
+.logo-img {
+    height: 60px; /* Hauteur maximale dans le menu */
+    width: auto;
+    display: block;
 }
-
-.logo span { color: var(--primary); }
 
 .nav-menu {
     display: flex;
@@ -60,7 +59,7 @@ nav {
 
 /* Section Hero */
 #hero {
-    height: 80vh;
+    height: 70vh;
     background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
                 url('https://images.unsplash.com/photo-1473960104509-546e8b811317?auto=format&fit=crop&w=1200&q=80');
     background-size: cover;
@@ -81,273 +80,34 @@ nav {
     text-decoration: none;
     margin-top: 20px;
     font-weight: bold;
+    border: none;
+    cursor: pointer;
     transition: transform 0.2s;
 }
 
 .cta-button:hover { transform: scale(1.05); }
 
-/* Responsive */
 @media (max-width: 768px) {
-    .nav-menu { display: none; } /* On pourrait ajouter un menu burger ici */
+    .nav-menu { display: none; }
 }
 
 .section-title {
     text-align: center;
-    margin: 40px 0;
-    font-size: 2rem;
+    margin: 40px 0 20px;
+    font-size: 1.8rem;
     color: var(--dark);
 }
 
-.gallery-grid {
+/* Grilles */
+.info-grid, .sites-grid, .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
-    margin-bottom: 50px;
-}
-
-.model-card {
-    position: relative;
-    border-radius: 15px;
-    overflow: hidden; /* Pour que l'image ne dépasse pas des bords arrondis */
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.model-card:hover {
-    transform: translateY(-10px); /* Petit saut au survol */
-}
-
-.model-card img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover; /* Garde les proportions de l'image */
-    display: block;
-}
-
-.model-info {
-    padding: 20px;
-    background: white;
-}
-
-.model-info h3 {
-    margin-bottom: 5px;
-    color: var(--primary);
-}
-
-:root {
-    --primary: #3498db;
-    --dark: #2c3e50;
-    --light: #f8f9fa;
-    --text: #333;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-    font-family: 'Inter', sans-serif;
-    color: var(--text);
-    background-color: var(--light);
-}
-
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-header {
-    background: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--dark);
-}
-
-.logo span { color: var(--primary); }
-
-.nav-menu {
-    display: flex;
-    list-style: none;
-}
-
-.nav-menu li { margin-left: 20px; }
-
-.nav-menu a {
-    text-decoration: none;
-    color: var(--dark);
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.nav-menu a:hover { color: var(--primary); }
-
-/* Section Hero */
-#hero {
-    height: 80vh;
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                url('https://images.unsplash.com/photo-1473960104509-546e8b811317?auto=format&fit=crop&w=1200&q=80');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-align: center;
-}
-
-.cta-button {
-    display: inline-block;
-    background: var(--primary);
-    color: white;
-    padding: 12px 30px;
-    border-radius: 30px;
-    text-decoration: none;
-    margin-top: 20px;
-    font-weight: bold;
-    transition: transform 0.2s;
-}
-
-.cta-button:hover { transform: scale(1.05); }
-
-/* Responsive */
-@media (max-width: 768px) {
-    .nav-menu { display: none; } /* On pourrait ajouter un menu burger ici */
-}
-.presence-card {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    margin: 30px auto;
-    max-width: 400px;
-}
-
-#presence-btn {
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    transition: background 0.3s ease;
-}
-
-/* État quand le membre est présent */
-.is-present {
-    background-color: #27ae60 !important; /* Vert */
-}
-.auth-box {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    margin-top: 20px;
-    text-align: center;
-}
-
-.btn-small {
-    background: #95a5a6;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.8rem;
-}
-.model-card {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-    border: 1px solid #eee;
-}
-
-.model-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(52, 152, 219, 0.2); /* Ombre bleutée au survol */
-    border-color: var(--primary);
-}
-
-.model-info h3 {
-    font-family: 'Oswald', sans-serif; /* Police typée aéro */
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-.weather-card {
-    background: linear-gradient(135deg, #2c3e50, #34495e);
-    color: white;
-    padding: 15px 25px;
-    border-radius: 15px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-#weather-content {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    width: 100%;
-    justify-content: space-around;
-}
-
-.weather-main {
-    display: flex;
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.status-badge {
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    margin-left: 10px;
-}
-
-.wind-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1.1rem;
-}
-
-#windsock {
-    display: inline-block;
-    font-size: 1.5rem;
-    transform-origin: left center;
-    /* Animation de base */
-    animation: wave 2s ease-in-out infinite;
-}
-
-@keyframes wave {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(15deg); }
-}
-
-.info-grid, .sites-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
     margin-bottom: 40px;
 }
 
-.pricing-card, .events-card, .site-box {
+/* Cartes d'information */
+.pricing-card, .events-card, .site-box, .presence-card, .auth-box {
     background: white;
     padding: 25px;
     border-radius: 15px;
@@ -373,62 +133,10 @@ nav {
     color: var(--primary);
 }
 
-.contact-info {
+.contact-box {
     margin-top: 20px;
     padding-top: 15px;
     border-top: 2px dashed #eee;
-    font-size: 0.9rem;
-}
-
-.section-title {
-    text-align: center;
-    margin: 40px 0 20px;
-    font-size: 1.8rem;
-    color: var(--dark);
-}
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    margin-bottom: 30px;
-}
-
-.info-card, .sites-container {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-.pricing-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 15px 0;
-}
-
-.pricing-table td {
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.pricing-table td:last-child {
-    text-align: right;
-    font-weight: bold;
-    color: var(--primary);
-}
-
-.calendar-list {
-    list-style: none;
-    padding: 0;
-}
-
-.calendar-list li {
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.calendar-list li strong {
-    color: var(--primary);
 }
 
 .btn-email {
@@ -443,20 +151,118 @@ nav {
     transition: background 0.3s;
 }
 
-.btn-email:hover {
-    background: var(--primary);
+.btn-email:hover { background: var(--primary); }
+
+/* Flotte */
+.model-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
 }
 
-.sites-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-top: 15px;
+.model-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(52, 152, 219, 0.2);
+    border-color: var(--primary);
 }
 
-.site-item {
-    background: var(--light);
-    padding: 15px;
-    border-radius: 10px;
-    border-top: 3px solid var(--primary);
+.model-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.model-info { padding: 20px; }
+.model-info h3 {
+    color: var(--dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+/* Météo */
+.weather-card {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 15px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+#weather-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.weather-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.wind-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+}
+
+#windsock {
+    display: inline-block;
+    font-size: 1.5rem;
+    transform-origin: left center;
+    animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(15deg); }
+}
+
+/* Authentification & Présence */
+.input-style {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-small {
+    background: #95a5a6;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.members-style {
+    list-style: none;
+    text-align: left;
+    margin: 15px 0;
 }
