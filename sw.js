@@ -16,7 +16,7 @@ const ASSETS_TO_CACHE = [
     './sallevannier.jpg',
     './terrain.jpg',
         './terrainvol.jpg',
-    'https://images.unsplash.com/photo-1473960104509-546e8b811317?auto=format&fit=crop&w=1200&q=80'
+  
 ];
 
 // 1. Événement d'INSTALLATION : On stocke les fichiers
