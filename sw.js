@@ -10,6 +10,11 @@ const ASSETS_TO_CACHE = [
      './logo.jpg',
     './icon-192.png', // Nouvelle icône application
     './icon-512.png', // Nouvelle icône application
+    './ecolage.png',
+    './entraide.jpg',
+    './sallegri.jpg',
+    './sallevannier.jpg',
+    './terrain.jpg',
     'https://images.unsplash.com/photo-1473960104509-546e8b811317?auto=format&fit=crop&w=1200&q=80'
 ];
 
