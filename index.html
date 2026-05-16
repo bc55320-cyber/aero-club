@@ -365,7 +365,7 @@
 
         async function getWeather() {
     const apiKey = "24f6a9d02f6b203305d4609786f8b512"; // Remplace par ta clé
-    const city = "Sommedieue"; // Mets la ville de ton terrain
+    const city = "Thierville sur Meuse"; // Mets la ville de ton terrain
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=fr&appid=${apiKey}`;
 
     try {
@@ -428,6 +428,70 @@ getWeather();
                     });
             });
         }
+
+
+
+
+// ==========================================
+// 2. GESTION DE L'AUTHENTIFICATION FIREBASE
+// ==========================================
+
+// Éléments HTML de l'interface
+const authSection = document.getElementById('auth-section');
+const privateContent = document.getElementById('private-content');
+const emailInput = document.getElementById('member-email');
+const passwordInput = document.getElementById('member-password');
+const loginButton = document.querySelector('#auth-section .cta-button');
+
+// Par précaution, on s'assure que la zone privée est cachée au chargement initial
+if (privateContent) privateContent.style.display = 'none';
+
+// Écouteur sur le bouton de connexion manuel
+if (loginButton) {
+    loginButton.addEventListener('click', () => {
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        if (!email || !password) {
+            alert('Veuillez remplir tous les champs.');
+            return;
+        }
+
+        // Appel à la méthode de connexion Firebase v9+ / v10+
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .catch((error) => {
+                console.error("Erreur de connexion :", error);
+                alert("Identifiants incorrects. Accès réservé aux membres du club.");
+            });
+    });
+}
+
+// Surveillance de l'état de connexion en temps réel par Firebase
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        // L'utilisateur est connecté 🎉
+        console.log("👤 Membre connecté :", user.email);
+        
+        // Changement visuel de l'interface
+        if (authSection) authSection.style.display = 'none'; // Cache le formulaire
+        if (privateContent) privateContent.style.display = 'grid'; // Affiche l'espace membre
+        
+        // Optionnel : Vous pouvez charger les données Firebase de présence ici
+    } else {
+        // L'utilisateur est déconnecté (ou pas encore connecté)
+        console.log("🔒 Aucun membre connecté.");
+        if (authSection) authSection.style.display = 'block';
+        if (privateContent) privateContent.style.display = 'none';
+    }
+});
+
+// ==========================================
+// 3. INITIALISATION AU CHARGEMENT DE LA PAGE
+// ==========================================
+window.addEventListener('DOMContentLoaded', () => {
+    fetchWeather(); // Lance le calcul météo dès le départ
+});
+        
     </script>
 </body>
 </html>
