@@ -274,3 +274,16 @@ nav {
     border-radius: 8px;   /* Petits bords arrondis esthétiques */
     margin-bottom: 15px;  /* Espace entre l'image et le titre */
 }
+* Section Hero modifiée avec votre propre image */
+#hero {
+    height: 70vh;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                url('terrain-hero.jpg'); /* <-- Le nom de votre nouvelle photo */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
