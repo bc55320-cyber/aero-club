@@ -38,17 +38,16 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// 3. Événement FETCH : On intercepte les requêtes réseau
+// 3. Événement FETCH : Intercepter uniquement les ressources locales
 self.addEventListener('fetch', (event) => {
-    event.respondWith(
-        caches.match(event.request)
-            .then((response) => {
-                // Retourne le fichier du cache s'il existe, sinon fait la requête réseau
-                return response || fetch(event.request);
-            })
-            .catch(() => {
-                // Optionnel : Retourner une page d'erreur spécifique ici
-                console.log('Ressource non trouvée et pas de réseau.');
-            })
-    );
+    // On ne gère que les requêtes vers nos propres fichiers (statiques)
+    if (event.request.url.startsWith(self.location.origin)) {
+        event.respondWith(
+            caches.match(event.request)
+                .then((response) => {
+                    return response || fetch(event.request);
+                })
+        );
+    }
+    // Les requêtes Firebase et OpenWeather passent directement par le réseau sans interférence
 });
