@@ -1,5 +1,5 @@
 // Nom du cache (incrémentez v1, v2, etc. lors de modifications majeures)
-const CACHE_NAME = 'aero-club-v1';
+const CACHE_NAME = 'aero-club-v2';
 
 // Liste des fichiers à mettre en cache pour le mode hors-ligne
 const ASSETS_TO_CACHE = [
@@ -8,6 +8,8 @@ const ASSETS_TO_CACHE = [
     './style.css',
     './manifest.json',
      './logo.jpg',
+    './icon-192.png', // Nouvelle icône application
+    './icon-512.png', // Nouvelle icône application
     'https://images.unsplash.com/photo-1473960104509-546e8b811317?auto=format&fit=crop&w=1200&q=80'
 ];
 
