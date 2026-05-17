@@ -15,7 +15,9 @@ const ASSETS_TO_CACHE = [
     './sallegri.jpg',
     './sallevannier.jpg',
     './terrain.jpg',
-        './terrainvol.jpg',
+     './terrainvol.jpg',   
+        './documents/infos Club Mai 2026.pdf',
+     './documents/RÈGLEMENT INTÉRIEUR – Model’s Club Fleming (2026).pdf',
   
 ];
 
