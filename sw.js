@@ -1,5 +1,5 @@
 // Nom du cache (incrémentez v1, v2, etc. lors de modifications majeures)
-const CACHE_NAME = 'aero-club-v5';
+const CACHE_NAME = 'aero-club-v6';
 
 // Liste des fichiers à mettre en cache pour le mode hors-ligne
 const ASSETS_TO_CACHE = [
@@ -15,6 +15,8 @@ const ASSETS_TO_CACHE = [
     './sallegri.jpg',
     './sallevannier.jpg',
     './terrain.jpg',
+     './interclub.jpg',
+     './airdoudou.jpg',
      './terrainvol.jpg',   
         './documents/infos Club Mai 2026.pdf',
      './documents/RÈGLEMENT INTÉRIEUR – Model’s Club Fleming (2026).pdf',
