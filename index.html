@@ -11,7 +11,12 @@
 <body>
 <!-- Écran d'introduction vidéo -->
 <div id="video-loader">
-  <video id="intro-video" muted playsinline poster="icons/icon-512x512.png">
+  <button id="sound-btn" aria-label="Activer le son">
+    <svg id="sound-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path id="icon-path" d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zM4.34 2.93L2.93 4.34 7.59 9H3v6h4l5 5v-6.59l4.18 4.18c-.65.49-1.37.88-2.18 1.11v2.06c1.35-.31 2.59-.95 3.64-1.81l2.43 2.43 1.41-1.41L4.34 2.93zM12 4L9.91 6.09 12 8.18V4z"/>
+    </svg>
+  </button>
+    <video id="intro-video" muted playsinline poster="icons/icon-512x512.png">
     <source src="anime-logo.mp4" type="video/mp4">
   </video>
 </div>
@@ -393,21 +398,28 @@
   const videoLoader = document.getElementById('video-loader');
   const video = document.getElementById('intro-video');
   const appContent = document.getElementById('app-content');
+     const soundBtn = document.getElementById('sound-btn');
+  const iconPath = document.getElementById('icon-path');
 
-  // Force la lecture en muet pour contourner le blocage mobile
+  // SVG du haut-parleur AVEC du son
+  const iconAvecSon = "M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z";
+     // Force la lecture en muet pour contourner le blocage mobile
   video.muted = true; 
   video.play().catch(() => passerAuSite());
 
-  // DES QUE L'UTILISATEUR TOUCHE L'ÉCRAN, ON ACTIVE LE SON
-  const activerLeSon = () => {
-    video.muted = false;
-    // On retire l'écouteur pour ne pas répéter l'action inutilement
-    document.removeEventListener('click', activerLeSon);
-    document.removeEventListener('touchstart', activerLeSon);
-  };
-  document.addEventListener('click', activerLeSon);
-  document.addEventListener('touchstart', activerLeSon);
+// 2. Gestion du bouton de son
+  soundBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Évite les conflits
 
+    if (video.muted) {
+      video.muted = false;
+      iconPath.setAttribute('d', iconAvecSon); // Change l'icône
+    } else {
+      video.muted = true;
+      // Remet l'icône muet du départ
+      iconPath.setAttribute('d', "M4.34 2.93L2.93 4.34 7.59 9H3v6h4l5 5v-6.59l4.18 4.18c-.65.49-1.37.88-2.18 1.11v2.06c1.35-.31 2.59-.95 3.64-1.81l2.43 2.43 1.41-1.41L4.34 2.93zM12 4L9.91 6.09 12 8.18V4z");
+    }
+  });
   video.addEventListener('ended', passerAuSite);
 
   function passerAuSite() {
