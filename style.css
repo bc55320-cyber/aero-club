@@ -304,5 +304,5 @@ nav {
 #intro-video {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ou 'contain' si tu ne veux pas que la vidéo soit rognée sur les écrans longs */
+  object-fit: contain; /* Ou 'contain' si tu ne veux pas que la vidéo soit rognée sur les écrans longs */
 }
