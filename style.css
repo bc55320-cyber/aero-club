@@ -307,3 +307,27 @@ nav {
   object-fit: contain; /* Ou 'contain' si tu ne veux pas que la vidéo soit rognée sur les écrans longs */
     pointer-events: none; /* 👈 REND LA VIDÉO INVISIBLE AUX CLICS (plus de pause forcée) */
 }
+/* Style du bouton haut-parleur */
+#sound-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10000; /* Passe au-dessus de la vidéo */
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent; /* Enlève le flash bleu sur mobile */
+}
+
+#sound-icon {
+  width: 24px;
+  height: 24px;
+}
