@@ -389,26 +389,30 @@
             });
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
+ window.addEventListener('DOMContentLoaded', () => {
   const videoLoader = document.getElementById('video-loader');
   const video = document.getElementById('intro-video');
   const appContent = document.getElementById('app-content');
 
-  // 1. Lance la vidéo
-  video.play().catch(error => {
-    // Sécurité : Si le navigateur bloque l'autoplay, on passe directement au site
-    console.log("Lecture vidéo bloquée ou impossible, passage au site.");
-    passerAuSite();
-  });
+  // Force la lecture en muet pour contourner le blocage mobile
+  video.muted = true; 
+  video.play().catch(() => passerAuSite());
 
-  // 2. Attend la fin de la vidéo pour afficher le site
+  // DES QUE L'UTILISATEUR TOUCHE L'ÉCRAN, ON ACTIVE LE SON
+  const activerLeSon = () => {
+    video.muted = false;
+    // On retire l'écouteur pour ne pas répéter l'action inutilement
+    document.removeEventListener('click', activerLeSon);
+    document.removeEventListener('touchstart', activerLeSon);
+  };
+  document.addEventListener('click', activerLeSon);
+  document.addEventListener('touchstart', activerLeSon);
+
   video.addEventListener('ended', passerAuSite);
 
   function passerAuSite() {
     videoLoader.style.display = 'none';
     appContent.style.display = 'block';
-    
-    // Optionnel : Déclencher un événement si ton framework (Vue, React...) a besoin de savoir que l'intro est finie
   }
 });
     </script>
