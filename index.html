@@ -9,7 +9,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!-- Écran d'introduction vidéo -->
+<div id="video-loader">
+  <video id="intro-video" muted playsinline poster="icons/icon-512x512.png">
+    <source src="anime-logo.mp4" type="video/mp4">
+  </video>
+</div>
 
+<!-- Le reste de ton site/appli -->
+<div id="app-content" style="display: none;">
     <header>
         <nav class="container">
             <a href="./">
@@ -193,7 +201,7 @@
     <footer style="background-color: var(--dark); color: white; padding: 20px 0; text-align: center;">
         <p>&copy; 2026 Model's Club Fleming. Tous droits réservés.</p>
     </footer>
-
+</div>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
         import { getDatabase, ref, set, onValue, remove, get } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
@@ -380,6 +388,29 @@
                     .catch((err) => console.error('❌ Échec SW :', err));
             });
         }
+
+        window.addEventListener('DOMContentLoaded', () => {
+  const videoLoader = document.getElementById('video-loader');
+  const video = document.getElementById('intro-video');
+  const appContent = document.getElementById('app-content');
+
+  // 1. Lance la vidéo
+  video.play().catch(error => {
+    // Sécurité : Si le navigateur bloque l'autoplay, on passe directement au site
+    console.log("Lecture vidéo bloquée ou impossible, passage au site.");
+    passerAuSite();
+  });
+
+  // 2. Attend la fin de la vidéo pour afficher le site
+  video.addEventListener('ended', passerAuSite);
+
+  function passerAuSite() {
+    videoLoader.style.display = 'none';
+    appContent.style.display = 'block';
+    
+    // Optionnel : Déclencher un événement si ton framework (Vue, React...) a besoin de savoir que l'intro est finie
+  }
+});
     </script>
 </body>
 </html>
